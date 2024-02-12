@@ -3,15 +3,8 @@ package med.voll.api.controller;
 import jakarta.validation.Valid;
 import med.voll.api.domain.consulta.AgendaDeConsultas;
 import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
-import med.voll.api.domain.consulta.DadosDetalhamentoConsulta;
-import med.voll.api.domain.usuario.DadosAutenticacao;
-import med.voll.api.domain.usuario.Usuario;
-import med.voll.api.infra.security.DadosTokenJWT;
-import med.voll.api.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +20,7 @@ public class ConsultaController {
     @PostMapping
     @Transactional
     public ResponseEntity agendar(@RequestBody @Valid DadosAgendamentoConsulta dados) {
-        agenda.agendar(dados);
-        return ResponseEntity.ok(new DadosDetalhamentoConsulta(null, null, null, null));
+        return ResponseEntity.ok(agenda.agendar(dados));
     }
 
 }
